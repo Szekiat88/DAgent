@@ -52,11 +52,11 @@ public class ProjectDetailController {
 
     @GetMapping
     public ResponseEntity<Object> getProducts(@RequestParam(required = false, defaultValue = "0") int page,
-                                              @RequestParam(required = false,defaultValue = "5") int limit,
+                                              @RequestParam(required = false,defaultValue = "3") int limit,
                                               @RequestParam(required = false) String productName,
                                               @RequestParam(required = false) Sort.Direction sortType) {
         try {
-            Page<ProjectDetail> productPage = projectDetailService.getRequestFilters(page, limit, productName, sortType);
+            Page<ProjectDetail> productPage = projectDetailService.getRequestFilters(page, 3, productName, sortType);
             productPage.map(projectDetail -> projectDetail.getName());
             return ResponseHandler.handleResponse("Successfully get products", HttpStatus.OK,productPage);
         } catch (Exception e) {
