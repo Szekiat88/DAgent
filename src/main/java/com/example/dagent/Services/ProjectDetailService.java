@@ -4,6 +4,8 @@ import com.example.dagent.Entities.ProjectDetail;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
+import java.util.Optional;
+
 public interface ProjectDetailService {
     ProjectDetail addProjectDetail(ProjectDetail projectDetail);
 
@@ -12,6 +14,8 @@ public interface ProjectDetailService {
     void deleteProjectDetail(Long id);
 
     Page<ProjectDetail> getRequestFilters(int page, int limit, String productName, Sort.Direction sortType);
+
+    Optional<ProjectDetail> getProjectDetailById (Long id);
 
 
 }

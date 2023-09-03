@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/projectdetail")
 public class ProjectDetailController {
@@ -57,8 +59,19 @@ public class ProjectDetailController {
                                               @RequestParam(required = false) Sort.Direction sortType) {
         try {
             Page<ProjectDetail> productPage = projectDetailService.getRequestFilters(page, 3, productName, sortType);
-            productPage.map(projectDetail -> projectDetail.getName());
+            productPage.map(projectDetail -> projectDetail.getProjectName());
             return ResponseHandler.handleResponse("Successfully get products", HttpStatus.OK,productPage);
+        } catch (Exception e) {
+            System.out.println("Its fail" + e);
+            return ResponseHandler.handleResponse("ERROR",HttpStatus.BAD_REQUEST,e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> findProductById (@PathVariable Long id) {
+        try {
+            Optional<ProjectDetail> projectDetail = projectDetailService.getProjectDetailById(id);
+            return ResponseHandler.handleResponse("Successfully get products", HttpStatus.OK,projectDetail);
         } catch (Exception e) {
             System.out.println("Its fail" + e);
             return ResponseHandler.handleResponse("ERROR",HttpStatus.BAD_REQUEST,e.getMessage());

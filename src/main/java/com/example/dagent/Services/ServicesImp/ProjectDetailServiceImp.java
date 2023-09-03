@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProjectDetailServiceImp implements ProjectDetailService {
 
@@ -46,6 +48,11 @@ public class ProjectDetailServiceImp implements ProjectDetailService {
         return productPage;
     }
 
+    @Override
+    public Optional<ProjectDetail> getProjectDetailById(Long id) {
+        return productRepository.findById(id);
+    }
+
     private Page<ProjectDetail> getProductsList(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);
         return productRepository.findAll(pageable);
@@ -53,10 +60,8 @@ public class ProjectDetailServiceImp implements ProjectDetailService {
 
     private Page<ProjectDetail> findProductsByName(int page, int limit, String productName) {
         Pageable pageable = PageRequest.of(page, limit);
-        return productRepository.findByNameContainingIgnoreCase(productName, pageable);
+        return productRepository.findByProjectNameContainingIgnoreCase(productName, pageable);
     }
-
-//    private Page<ProjectDetail> getProductsOrder
 
 
 }

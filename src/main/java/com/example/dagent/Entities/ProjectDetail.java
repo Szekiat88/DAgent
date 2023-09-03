@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -20,21 +22,26 @@ public class ProjectDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull(message = "name cannot null")
-    private String name;
+    private String projectName;
+    private Integer minNoOfRoomsPerUnit;
+    private Integer maxNoOfRoomsPerUnit;
+    private Integer smallestSquareFeet;
+    private Integer largestSquareFeet;
+    private Integer lowestPricePerSquareFeet;
+    private Integer highestPricePerSquareFeet;
     private String address;
-    private String developer;
-
+    private String developerName;
     private Integer yearOfCompletion;
     private Integer totalNoOfUnits;
     private String siteArea;
-    @Enumerated(EnumType.STRING) // Specify the mapping strategy
-    private Tenure tenure;
     private Integer managementFee;
     private Integer noOfLifts;
     private Integer totalLandAces;
     private String projectDescription;
-    @Lob
-    private byte[] image;
+    @ElementCollection
+    private List<String> facilities;
+    @Enumerated(EnumType.STRING) // Specify the mapping strategy
+    private Tenure tenure;
 
     public void setProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
