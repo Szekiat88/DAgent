@@ -25,7 +25,7 @@ public class FacilityDistanceServiceImp implements FacilityDistanceService {
 
     @Override
     public FacilityDistance editFacilityDistance(FacilityDistance facilityDistance) {
-        boolean exist = distanceRepository.existsById(facilityDistance.getId());
+        boolean exist = distanceRepository.existsById(facilityDistance.getFacilityId());
         if (exist){
             return distanceRepository.save(facilityDistance);
         }
