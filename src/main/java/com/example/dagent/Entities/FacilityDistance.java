@@ -17,7 +17,7 @@ import lombok.Setter;
 public class FacilityDistance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long facilityId;
+    private Long id;
     private String LocationName;
     private String locationDescription;
     private Integer travelDuration;

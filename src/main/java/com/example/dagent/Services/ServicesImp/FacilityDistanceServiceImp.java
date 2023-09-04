@@ -1,6 +1,8 @@
 package com.example.dagent.Services.ServicesImp;
 
 import com.example.dagent.Entities.FacilityDistance;
+import com.example.dagent.Entities.ProjectDetail;
+import com.example.dagent.Enum.FacilityType;
 import com.example.dagent.Repositories.FacilityDistanceRepository;
 import com.example.dagent.Services.FacilityDistanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class FacilityDistanceServiceImp implements FacilityDistanceService {
 
     @Override
     public FacilityDistance editFacilityDistance(FacilityDistance facilityDistance) {
-        boolean exist = distanceRepository.existsById(facilityDistance.getFacilityId());
+        boolean exist = distanceRepository.existsById(facilityDistance.getId());
         if (exist){
             return distanceRepository.save(facilityDistance);
         }
@@ -39,20 +41,26 @@ public class FacilityDistanceServiceImp implements FacilityDistanceService {
 
     @Override
     public Page<FacilityDistance> getRequestFilters(int page, int limit, String productName, Sort.Direction sortType) {
-        Page<FacilityDistance> productPage = null;
-        if(productName==null && sortType==null){
-            productPage = getDistanceFacilityList(page, limit);
-        }
-        if(productName!=null && sortType==null){
+        return null;
+    }
 
-        }
+    @Override
+    public Page<FacilityDistance> findByProjectIdAndFacilityType(int page, int limit, int id, FacilityType fd) {
+        Page<FacilityDistance> productPage = null;
+        productPage = findByProjectIdAndFacilityTypeRaw(page, limit, id, fd);
         return productPage;
     }
 
     @Override
     public Optional<FacilityDistance> getFacilityDistanceById(Long id) {
-        return Optional.empty();
+        return distanceRepository.findById(id);
     }
+
+    public Page<FacilityDistance> findByProjectIdAndFacilityTypeRaw(int page, int limit, int id, FacilityType ft) {
+        Pageable pageable = PageRequest.of(page, limit);
+        return distanceRepository.findByProjectIdAndAndFacilityType(id,ft,pageable);
+    }
+
 
     private Page<FacilityDistance> getDistanceFacilityList(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);

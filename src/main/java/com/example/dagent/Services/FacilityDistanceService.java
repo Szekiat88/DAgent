@@ -1,6 +1,7 @@
 package com.example.dagent.Services;
 
 import com.example.dagent.Entities.FacilityDistance;
+import com.example.dagent.Enum.FacilityType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
@@ -17,5 +18,8 @@ public interface FacilityDistanceService {
 
     Optional<FacilityDistance> getFacilityDistanceById (Long id);
 
+    Page<FacilityDistance> findByProjectIdAndFacilityType(int page, int limit, int id, FacilityType fd);
 
-}
+
+
+    }
