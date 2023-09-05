@@ -51,16 +51,16 @@ public class FacilityDistanceServiceImp implements FacilityDistanceService {
         return productPage;
     }
 
-    @Override
-    public Optional<FacilityDistance> getFacilityDistanceById(Long id) {
-        return distanceRepository.findById(id);
-    }
 
     public Page<FacilityDistance> findByProjectIdAndFacilityTypeRaw(int page, int limit, int id, FacilityType ft) {
         Pageable pageable = PageRequest.of(page, limit);
         return distanceRepository.findByProjectIdAndAndFacilityType(id,ft,pageable);
     }
 
+    @Override
+    public Optional<FacilityDistance> getFacilityDistanceById(Long id) {
+        return distanceRepository.findById(id);
+    }
 
     private Page<FacilityDistance> getDistanceFacilityList(int page, int limit) {
         Pageable pageable = PageRequest.of(page, limit);

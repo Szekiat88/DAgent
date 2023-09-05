@@ -21,6 +21,8 @@ public class Image {
     @Lob
     @Column(length = 1048576) // Adjust the length as needed
     private byte[] image;
+    //needed to add category
+    //needed to add siteMap, UnitsTypesLayuot, facility, projectPhoto
 
     public void setData(byte[] bytes) {
     }
