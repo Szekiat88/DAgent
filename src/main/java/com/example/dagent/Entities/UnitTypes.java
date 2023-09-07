@@ -26,5 +26,4 @@ public class UnitTypes {
     private Boolean yard;
     private Integer unitSquareFeet;
 
-
 }
